@@ -25,12 +25,13 @@ __DATA__
 --- config
     location / {
         proxy_ssl_session_reuse off;
+        proxy_set_header Host "www.alipay.com";
         proxy_pass https://test;
     }
    
 --- request
 GET /
---- response_body_like: ^<(.*)>[\r\n\s\t]*$
+--- response_body_like: ^.*$
 
 === TEST 2: the ssl_hello_check test with ip_hash
 --- http_config
@@ -46,12 +47,13 @@ GET /
 --- config
     location / {
         proxy_ssl_session_reuse off;
+        proxy_set_header Host "www.alipay.com";
         proxy_pass https://test;
     }
 
 --- request
 GET /
---- response_body_like: ^<(.*)>[\r\n\s\t]*$
+--- response_body_like: ^.*$
 
 === TEST 3: the ssl_hello_check test with bad ip
 --- http_config
@@ -67,12 +69,13 @@ GET /
 --- config
     location / {
         proxy_ssl_session_reuse off;
+        proxy_set_header Host "www.alipay.com";
         proxy_pass https://test;
     }
 
 --- request
 GET /
---- response_body_like: ^<(.*)>[\r\n\s\t]*$
+--- response_body_like: ^.*$
 
 === TEST 4: the ssl_hello_check test with least_conn
 --- http_config
@@ -88,17 +91,18 @@ GET /
 --- config
     location / {
         proxy_ssl_session_reuse off;
+        proxy_set_header Host "www.alipay.com";
         proxy_pass https://test;
     }
 
 --- request
 GET /
---- response_body_like: ^<(.*)>[\r\n\s\t]*$
+--- response_body_like: ^.*$
 
 === TEST 5: the ssl_hello_check test with port 80
 --- http_config
     upstream test{
-        server www.alipay.com:443;
+        server www.nginx.org:443;
 
         check interval=4000 rise=1 fall=1 timeout=2000 type=http port=80;
         check_http_send "GET / HTTP/1.0\r\n\r\n";
@@ -108,12 +112,14 @@ GET /
 --- config
     location / {
         proxy_ssl_session_reuse off;
+        proxy_set_header Host "www.nginx.org";
         proxy_pass https://test;
     }
 
 --- request
 GET /
---- response_body_like: ^<(.*)>[\r\n\s\t]*$
+--- error_code: 502
+--- response_body_like: ^.*$
 
 === TEST 6: the ssl_hello_check test with port 443
 --- http_config
@@ -126,12 +132,13 @@ GET /
 --- config
     location / {
         proxy_ssl_session_reuse off;
+        proxy_set_header Host "www.alipay.com";
         proxy_pass https://test;
     }
 
 --- request
 GET /
---- response_body_like: ^<(.*)>[\r\n\s\t]*$
+--- response_body_like: ^.*$
 
 === TEST 7: the ssl_hello_check test with port 444
 --- http_config
@@ -144,6 +151,7 @@ GET /
 --- config
     location / {
         proxy_ssl_session_reuse off;
+        proxy_set_header Host "www.alipay.com";
         proxy_pass https://test;
     }
 

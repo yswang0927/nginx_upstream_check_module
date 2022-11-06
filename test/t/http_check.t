@@ -74,7 +74,7 @@ GET /
 
 --- request
 GET /
---- response_body_like: ^<(.*)>$
+--- response_body_like: ^.*$
 
 === TEST 3: the http_check test
 --- http_config
@@ -337,7 +337,7 @@ GET /
 
 --- request
 GET /
---- response_body_like: ^<(.*)>$
+--- response_body_like: ^.*$
 
 === TEST 12: the http_check test-single server, least conn
 --- http_config
