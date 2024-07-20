@@ -1,3 +1,8 @@
+# 更新记录
+
+- 2024/07/20 更新为 https://github.com/alibaba/tengine/tree/master/modules/ngx_http_upstream_check_module 中的最新代码。
+
+
 Name
     nginx_http_upstream_check_module - support upstream health check with
     Nginx
