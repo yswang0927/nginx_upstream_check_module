@@ -1223,8 +1223,9 @@ ngx_http_upstream_check_add_dynamic_peer_shm(ngx_pool_t *pool,
     ngx_memzero(&peer_shm[index], sizeof(ngx_http_upstream_check_peer_shm_t));
 
     peer_shm[index].socklen = peer_addr->socklen;
+    /* yswang merge: https://github.com/alibaba/tengine/pull/1508 */
     peer_shm[index].sockaddr = ngx_slab_alloc_locked(shpool,
-                                                     peer_shm->socklen);
+                                                     peer_addr->socklen);
     if (peer_shm[index].sockaddr == NULL) {
         goto fail;
     }
