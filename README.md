@@ -1,5 +1,6 @@
 # 更新记录
 
+- 2024/07/24 因tengine的check_module存在问题：配置 `location /check_stauts {check_status;}` 指令不显示数据，先恢复到yaoweibin的代码，并merge pull/257的代码。
 - 2024/07/20 更新为 https://github.com/alibaba/tengine/tree/master/modules/ngx_http_upstream_check_module 中的最新代码。
 
 
